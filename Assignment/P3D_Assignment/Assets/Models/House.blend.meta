@@ -3,7 +3,57 @@ guid: d29b56d1483edcd4f87b56a9d300d5b6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brick
+    second: {fileID: 2100000, guid: e370cbe252eb53540a29a5ab5a14f2a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chimney_Pots
+    second: {fileID: 2100000, guid: 909efa59e47233a458a4d85a7ea4c039, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Exterior_Wall
+    second: {fileID: 2100000, guid: 61fbcf433cb8c7143b6cef0b71be35c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 916a2e3ccd9d2c14d85bb4d6024fa049, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GreenHouse_Frame
+    second: {fileID: 2100000, guid: eabb8ba8babbf734e9a12b551ace3f8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kitchen_Roof
+    second: {fileID: 2100000, guid: 7a1f168a43582bf468e7908a6d755408, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Porch_Panels
+    second: {fileID: 2100000, guid: 6c24daddc7ddb1740baf0022340ce0ab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Porch_Wood
+    second: {fileID: 2100000, guid: e064952fcdc7aaf45bab6e8f9f3824d6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_Grey
+    second: {fileID: 2100000, guid: 631557063d2bfe9478fe9cb68e246289, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_Slates
+    second: {fileID: 2100000, guid: 75c32d800413dcb45af36189d77d65c1, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
