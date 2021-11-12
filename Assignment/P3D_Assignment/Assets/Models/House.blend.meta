@@ -7,13 +7,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Bathroom_Floor
+    second: {fileID: 2100000, guid: 512c729b67a586f43b09e03011eaba35, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bedroom_Carpet
+    second: {fileID: 2100000, guid: 95eefc17d550d4645a14f6b8aabcb313, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bedroom_WallPaper
+    second: {fileID: 2100000, guid: 06070a4683e72d741a2e92e91f83dac7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Brick
     second: {fileID: 2100000, guid: e370cbe252eb53540a29a5ab5a14f2a0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Brick_Floor
+    second: {fileID: 2100000, guid: e6100707c61a9f74286939ae850f28f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ceiling
+    second: {fileID: 2100000, guid: c010d82b5f6876346995eaa77d8d8088, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Chimney_Pots
     second: {fileID: 2100000, guid: 909efa59e47233a458a4d85a7ea4c039, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Conservatory_Floor
+    second: {fileID: 2100000, guid: df2b55829b89c2b45b28272f7309b8dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dark_Wood
+    second: {fileID: 2100000, guid: a185324e1cd24474fa16a3c2a73fcf66, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -32,8 +67,48 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Hall_Carpet
+    second: {fileID: 2100000, guid: 57ff2638c1fa808429b91c18bcfa4e7b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hall_Wallpaper
+    second: {fileID: 2100000, guid: a3bf512505c07b342a0dcdc8a6e549ba, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kitchen_Floor
+    second: {fileID: 2100000, guid: 29080b1a908f77c4cbdf1866959307de, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Kitchen_Roof
     second: {fileID: 2100000, guid: 7a1f168a43582bf468e7908a6d755408, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kitchen_Wallpaper
+    second: {fileID: 2100000, guid: 3f91948f94518c3408745f5aeced0005, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Landing_Carpet
+    second: {fileID: 2100000, guid: 7a3b9e0c9abfbfd4f90912014fa6accc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Landing_Wallpaper
+    second: {fileID: 2100000, guid: 8ad0f9e0f9fce5244af3388aa2b26ca7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lounge_Carpet
+    second: {fileID: 2100000, guid: 0e99e192fe9ccde41ad48afa45e51cd3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lounge_Wallpaper
+    second: {fileID: 2100000, guid: 0aba322b8c172b44793d4e6b4525280e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

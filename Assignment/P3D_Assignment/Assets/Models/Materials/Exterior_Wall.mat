@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3833931209711318120
+--- !u!114 &-8426548383742363726
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 2800000, guid: f015bc8874405d944802be81ad3a3eaf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38f60e34c9cfa9c4ab3b2ab359bb486f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f015bc8874405d944802be81ad3a3eaf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 38f60e34c9cfa9c4ab3b2ab359bb486f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -146,7 +146,7 @@ Material:
     - _AlphaToMaskInspectorValue: 0
     - _Anisotropy: 0
     - _BlendMode: 0
-    - _BumpScale: 1
+    - _BumpScale: 2
     - _CoatMask: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -190,7 +190,7 @@ Material:
     - _IridescenceThickness: 1
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
-    - _Metallic: 0
+    - _Metallic: 0.08
     - _MetallicRemapMax: 1
     - _MetallicRemapMin: 0
     - _Mode: 0
