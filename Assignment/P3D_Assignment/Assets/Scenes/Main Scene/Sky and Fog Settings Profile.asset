@@ -165,7 +165,7 @@ MonoBehaviour:
     max: 1
   horizonTint:
     m_OverrideState: 1
-    m_Value: {r: 0.0754717, g: 0.0754717, b: 0.0754717, a: 1}
+    m_Value: {r: 0.509434, g: 0.5000578, b: 0.45945176, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 0
@@ -237,10 +237,10 @@ MonoBehaviour:
     m_Value: -1.25
   maximumHeight:
     m_OverrideState: 1
-    m_Value: 18.4
+    m_Value: 75
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 5.1
+    m_Value: 40
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
@@ -373,10 +373,10 @@ MonoBehaviour:
     m_Value: 0
   limitMin:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1.5
   limitMax:
     m_OverrideState: 1
-    m_Value: 14
+    m_Value: 1.5
   curveMap:
     m_OverrideState: 0
     m_Value:

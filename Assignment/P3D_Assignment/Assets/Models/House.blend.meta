@@ -52,6 +52,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Door_Handle
+    second: {fileID: 2100000, guid: 7e8fce041f6d6d849a5b22d8c017f0c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Exterior_Wall
     second: {fileID: 2100000, guid: 61fbcf433cb8c7143b6cef0b71be35c1, type: 2}
   - first:
