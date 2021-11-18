@@ -15,7 +15,6 @@ namespace Asset_Cleaner {
             wd.ExpandScenes = true;
             wd.ExpandFiles = true;
             wd.ScrollPos = Vector2.zero;
-            wd.Window.titleContent = new GUIContent("Asset Cleaner v1.0");
         }
 
         public void Run() {

@@ -238,6 +238,8 @@ namespace Asset_Cleaner {
 
 		public static bool IgnoredPaths(string path, out string str) {
 			var conf = Globals<Config>.Value;
+			str = "";
+			if (conf == null) return false;
 			foreach (var substr in conf.IgnorePathContains) {
 				Asr.IsNotNull(path);
 				Asr.IsNotNull(substr);

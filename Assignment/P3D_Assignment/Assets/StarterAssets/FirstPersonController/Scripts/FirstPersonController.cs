@@ -10,7 +10,7 @@ namespace StarterAssets
 {
 	[RequireComponent(typeof(CharacterController))]
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-	[RequireComponent(typeof(PlayerInput))]
+	[RequireComponent(typeof(PlayerInputHandler))]
 #endif
 	public class FirstPersonController : MonoBehaviour
 	{
@@ -68,7 +68,7 @@ namespace StarterAssets
 		private float _fallTimeoutDelta;
 
 		private CharacterController _controller;
-		private PlayerInput _input;
+		private PlayerInputHandler inputHandler;
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
@@ -85,7 +85,7 @@ namespace StarterAssets
 		private void Start()
 		{
 			_controller = GetComponent<CharacterController>();
-			_input = GetComponent<PlayerInput>();
+			inputHandler = GetComponent<PlayerInputHandler>();
 
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
@@ -114,10 +114,10 @@ namespace StarterAssets
 		private void CameraRotation()
 		{
 			// if there is an input
-			if (_input.Look.sqrMagnitude >= _threshold)
+			if (inputHandler.Look.sqrMagnitude >= _threshold)
 			{
-				_cinemachineTargetPitch += _input.Look.y * RotationSpeed * Time.deltaTime;
-				_rotationVelocity = _input.Look.x * RotationSpeed * Time.deltaTime;
+				_cinemachineTargetPitch += inputHandler.Look.y * RotationSpeed * Time.deltaTime;
+				_rotationVelocity = inputHandler.Look.x * RotationSpeed * Time.deltaTime;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -133,19 +133,19 @@ namespace StarterAssets
 		private void Move()
 		{
 			// set target speed based on move speed, sprint speed and if sprint is pressed
-			float targetSpeed = _input.Sprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed = inputHandler.Sprint ? SprintSpeed : MoveSpeed;
 
 			// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
 			// note: Vector2's == operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is no input, set the target speed to 0
-			if (_input.Move == Vector2.zero) targetSpeed = 0.0f;
+			if (inputHandler.Move == Vector2.zero) targetSpeed = 0.0f;
 
 			// a reference to the players current horizontal velocity
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
 
 			float speedOffset = 0.1f;
-			float inputMagnitude = _input.AnalogMovement ? _input.Move.magnitude : 1f;
+			float inputMagnitude = inputHandler.AnalogMovement ? inputHandler.Move.magnitude : 1f;
 
 			// accelerate or decelerate to target speed
 			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
@@ -163,14 +163,14 @@ namespace StarterAssets
 			}
 
 			// normalise input direction
-			Vector3 inputDirection = new Vector3(_input.Move.x, 0.0f, _input.Move.y).normalized;
+			Vector3 inputDirection = new Vector3(inputHandler.Move.x, 0.0f, inputHandler.Move.y).normalized;
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
-			if (_input.Move != Vector2.zero)
+			if (inputHandler.Move != Vector2.zero)
 			{
 				// move
-				inputDirection = transform.right * _input.Move.x + transform.forward * _input.Move.y;
+				inputDirection = transform.right * inputHandler.Move.x + transform.forward * inputHandler.Move.y;
 			}
 
 			// move the player
@@ -191,7 +191,7 @@ namespace StarterAssets
 				}
 
 				// Jump
-				if (_input.Jump && _jumpTimeoutDelta <= 0.0f)
+				if (inputHandler.Jump && _jumpTimeoutDelta <= 0.0f)
 				{
 					// the square root of H * -2 * G = how much velocity needed to reach desired height
 					_verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -215,7 +215,7 @@ namespace StarterAssets
 				}
 
 				// if we are not grounded, do not jump
-				_input.Jump = false;
+				inputHandler.Jump = false;
 			}
 
 			// apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)

@@ -109,7 +109,7 @@ namespace Asset_Cleaner {
 
         void OnSelectionChanged() {
             World.NewEntityWith(out RequestRepaintEvt _);
-            if (Globals<Config>.Value.Locked) return;
+            if (Globals<Config>.Value == null || Globals<Config>.Value.Locked) return;
             Counters(undo: false, redo: false, insertToHistory: !_preventHistoryInsert);
             _preventHistoryInsert = false;
 
@@ -140,6 +140,7 @@ namespace Asset_Cleaner {
         // prevents selection history flooding
         void OnUndoRedoPerformed() {
             // below is a hackish way to catch Undo/Redo from editor
+            //if (AufCtx.Destroyed) return;
             if (!Undo.GetCurrentGroupName().Equals("Selection Change")) return;
             var evt = Event.current;
             if (evt == null) return;

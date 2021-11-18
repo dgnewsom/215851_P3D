@@ -9,7 +9,8 @@ namespace Asset_Cleaner {
             type = AssetDatabase.GetMainAssetTypeAtPath(path);
             if (type == null) return false;
             var conf = Globals<Config>.Value;
-
+            if (conf == null) return false;
+            
             if (type.IsAssignableFromInverse(typeof(MonoScript))) return true;
             if (type.IsAssignableFromInverse(typeof(DefaultAsset))) return true;
             if (conf.IgnoreScriptable && type.IsAssignableFromInverse(typeof(ScriptableObject))) return true;
@@ -26,7 +27,13 @@ namespace Asset_Cleaner {
 
             if (type.IsAssignableFromInverse(typeof(UnityEngine.U2D.SpriteAtlas))) return true;
 
-            if (conf.IgnoreMaterial && type.IsAssignableFromInverse(typeof(Material))) return true;
+            if (conf.IgnoreMaterial && type.IsAssignableFromInverse(typeof(Material))) {
+                return true;
+            }
+
+            if (conf.IgnoreSprite && type.Name.Contains("Texture2D")) {
+                return true;
+            }
 
             return false;
         }

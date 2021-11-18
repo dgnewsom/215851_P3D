@@ -8,10 +8,12 @@ namespace Asset_Cleaner {
         public int Version;
         public bool MarkRed;
         public int RebuildCacheOnDemand;
+        public int UpdateUnusedAssetsOnDemand;
         public bool ShowInfoBox;
         public string IgnorePathContainsCombined;
         public bool IgnoreMaterial;
         public bool IgnoreScriptable;
+        public bool IgnoreSprite;
 
         static int BoolToInt(bool val) {
             return val ? 2 : 1;
@@ -36,7 +38,9 @@ namespace Asset_Cleaner {
                 IgnorePathContainsCombined = "Gizmos;Resources;Editor;Asset Cleaner;Asset Usage Finder;",
                 IgnoreMaterial = false,
                 IgnoreScriptable = true,
+                IgnoreSprite = false,
                 RebuildCacheOnDemand = 2,
+                UpdateUnusedAssetsOnDemand = 2,
             };
         }
 
@@ -48,7 +52,9 @@ namespace Asset_Cleaner {
             result.IgnorePathContainsCombined = src.IgnorePathContainsCombined;
             result.IgnoreMaterial = src.IgnoreMaterial;
             result.IgnoreScriptable = src.IgnoreScriptable;
+            result.IgnoreSprite = src.IgnoreSprite;
             result.RebuildCacheOnDemand = BoolToInt(src.RebuildCacheOnDemand);
+            result.UpdateUnusedAssetsOnDemand = BoolToInt(src.UpdateUnusedAssetsOnDemand);
         }
 
         public static void OnDeserialize(in AufSerializableData src, ref Config result) {
@@ -64,7 +70,9 @@ namespace Asset_Cleaner {
                 .ToArray();
             result.IgnoreMaterial = src.IgnoreMaterial;
             result.IgnoreScriptable = src.IgnoreScriptable;
+            result.IgnoreSprite = src.IgnoreSprite;
             result.RebuildCacheOnDemand = IntToBool(src.RebuildCacheOnDemand, def.RebuildCacheOnDemand == 2);
+            result.UpdateUnusedAssetsOnDemand = IntToBool(src.UpdateUnusedAssetsOnDemand, def.UpdateUnusedAssetsOnDemand == 2);
         }
 
         public bool Valid() {

@@ -37,7 +37,6 @@ namespace Asset_Cleaner {
                 })
                 .ToArray();
 
-
             var i = 0f;
             var total = (float) paths.Length;
             foreach (var path in paths) {
@@ -120,12 +119,11 @@ namespace Asset_Cleaner {
             unusedAssets.ExceptWith(scenes);
             var files = unusedAssets;
             UnusedFiles = new Dictionary<string, long>();
-            
-            foreach (var file in files) UnusedFiles[file] = CommonUtils.Size(file);
+            foreach (var file in files) UnusedFiles[file] = new FileInfo(file).Length;
 
             UnusedScenes = new Dictionary<string, long>();
-            foreach (var scene in scenes) UnusedScenes[scene] = CommonUtils.Size(scene);
-            
+            foreach (var scene in scenes) UnusedScenes[scene] = new FileInfo(scene).Length;
+
             // UpdateFoldersWithQty();
             foreach (var folder in Folders) {
                 var unusedFilesQty = UnusedFiles.Count(p => p.Key.StartsWith(folder));

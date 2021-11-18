@@ -1,8 +1,7 @@
 ﻿using System;
-using System.IO;
 
 namespace Asset_Cleaner {
-    static class CommonUtils {
+    public static class CommonUtils {
         static string[] _suffix = {"B", "KB", "MB", "GB", "TB"};
 
         public static string BytesToString(long byteCount) {
@@ -19,22 +18,6 @@ namespace Asset_Cleaner {
 
             num = Math.Round(bytes / Math.Pow(1024, place), 1);
             return $"{Math.Sign(byteCount) * num:F0} {_suffix[place]}";
-        }
-
-        // todo
-        public static long Size(string path) {
-            return TryGetSize(path, out var res) ? res : 0L;
-        }
-
-        public static bool TryGetSize(string path, out long result) {
-            if (!File.Exists(path)) {
-                result = default;
-                return false;
-            }
-
-            var fi = new FileInfo(path);
-            result = fi.Length;
-            return true;
         }
     }
 }

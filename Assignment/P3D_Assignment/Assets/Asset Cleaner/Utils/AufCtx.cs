@@ -4,6 +4,7 @@ namespace Asset_Cleaner {
     static class AufCtx {
         public static EcsWorld World;
 
+        public static EcsSystems UndoGroup;
         public static EcsSystems UpdateGroup;
         public static EcsSystems OnGuiGroup;
 
@@ -19,9 +20,12 @@ namespace Asset_Cleaner {
             (OnGuiGroup = new EcsSystems(World)
                 .Add(new SysWindowGui())).Init();
 
+            (UndoGroup = new EcsSystems(World)
+                    .Add(new SysUndoRedoSelection())
+                ).Init();
+
             (UpdateGroup = new EcsSystems(World)
                     .Add(new SysRepaintWindow())
-                    .Add(new SysUndoRedoSelection())
                     .Add(new SysProcessSearch())
                     .Add(new SysSceneCleanup())
                 ).Init();

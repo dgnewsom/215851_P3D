@@ -16,6 +16,7 @@ namespace Asset_Cleaner {
         void OnEnable() {
             var wd = Globals<WindowData>.Value = new WindowData();
             wd.Window = this;
+            wd.Window.titleContent = new GUIContent("Asset Cleaner v1.26");
 
             var firstTime = _persistentUndo == null;
             Globals<PersistentUndoRedoState>.Value = _persistentUndo ?? new PersistentUndoRedoState();
@@ -40,15 +41,21 @@ namespace Asset_Cleaner {
             var store = Globals<BacklinkStore>.Value;
             if (!store.Initialized) {
                 // prevent further window GUI rendering
+                var config = Globals<Config>.Value;
                 if (!GUILayout.Button("Initialize Cache")) return;
+    
                 var stopwatch = new Stopwatch();
                 stopwatch.Start();
                 store.Init();
                 stopwatch.Stop();
-                Globals<Config>.Value.InitializationTime = $"Initialized in {stopwatch.Elapsed.TotalSeconds:N} s";
+                config.InitializationTime = $"Initialized in {stopwatch.Elapsed.TotalSeconds:N} s";
                 AufCtx.World.NewEntityWith(out RequestRepaintEvt _);
             }
-
+            
+            if (Globals<Config>.Value.PendingUpdateUnusedAssets && GUILayout.Button ("Update unused assets")) {
+                ProcessAllAssets.ForceUpdateUnusedAssets ();
+            }
+            
             AufCtx.OnGuiGroup.Run();
         }
 
@@ -58,6 +65,7 @@ namespace Asset_Cleaner {
                 return;
             }
 
+            AufCtx.UndoGroup.Run();
             if (!Globals<BacklinkStore>.Value.Initialized) return;
             AufCtx.UpdateGroup.Run();
         }
@@ -72,12 +80,13 @@ namespace Asset_Cleaner {
         }
         
         void OnDisable() {
-            if (AufCtx.Destroyed) return;
+            if (!AufCtx.Destroyed) {
+                AufCtx.UndoGroup.Destroy();
+                AufCtx.UpdateGroup.Destroy();
+                AufCtx.OnGuiGroup.Destroy();
+                AufCtx.DestroyWorld();
+            }
             _persistentUndo = Globals<PersistentUndoRedoState>.Value;
-
-            AufCtx.UpdateGroup.Destroy();
-            AufCtx.OnGuiGroup.Destroy();
-            AufCtx.DestroyWorld();
 
             Globals<Config>.Value = default;
             Globals<PersistentUndoRedoState>.Value = default;

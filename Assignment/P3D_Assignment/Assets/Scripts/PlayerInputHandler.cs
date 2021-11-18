@@ -4,25 +4,25 @@ using UnityEngine.InputSystem;
 #endif
 
 
-	public class PlayerInput : MonoBehaviour
+	public class PlayerInputHandler : MonoBehaviour
 	{
-		[Header("Character Input Values")]
-		[SerializeField] private Vector2 move;
-        [SerializeField] private Vector2 look;
-        [SerializeField] private bool jump;
-        [SerializeField] private bool sprint;
-        [SerializeField] private bool interact;
-        [SerializeField] private bool grab;
-
-		[Header("Movement Settings")]
+        [Header("Movement Settings")]
         [SerializeField] private bool analogMovement;
 
-#if !UNITY_IOS || !UNITY_ANDROID
-		[Header("Mouse Cursor Settings")]
-        [SerializeField] private bool cursorLocked = true;
-        [SerializeField] private bool cursorInputForLook = true;
+        [Header("Mouse Cursor Settings")]
+        [SerializeField] private bool LockCursor = true;
 
-		//Public getters
+        private PlayerInput input;
+
+        //Input Variables
+        private Vector2 move;
+        private Vector2 look;
+        private bool jump;
+        private bool sprint;
+        private bool interact;
+        private bool grab;
+
+        //Public getters and setters
         public Vector2 Move => move;
         public Vector2 Look => look;
 
@@ -39,9 +39,21 @@ using UnityEngine.InputSystem;
         public bool Grab => grab;
 
         public bool AnalogMovement => analogMovement;
-#endif
 
-#if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+        private void Start()
+        {
+            input = GetComponent<PlayerInput>();
+            if (LockCursor)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+        }
+
+        public void OnControlsChanged()
+        {
+            print(input.currentControlScheme);
+        }
+
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -49,10 +61,8 @@ using UnityEngine.InputSystem;
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
+			LookInput(value.Get<Vector2>());
+            print(value.Get<Vector2>());
 		}
 
 		public void OnJump(InputValue value)
@@ -74,12 +84,8 @@ using UnityEngine.InputSystem;
         {
             GrabInput(value.isPressed);
         }
-#else
-	// old input sys if we do decide to have it (most likely wont)...
-#endif
 
-
-		private void MoveInput(Vector2 newMoveDirection)
+        private void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -103,25 +109,10 @@ using UnityEngine.InputSystem;
         {
             interact = newInteractState;
         }
-        
+
         private void GrabInput(bool newGrabState)
         {
             grab = newGrabState;
         }
-
-#if !UNITY_IOS || !UNITY_ANDROID
-
-		private void OnApplicationFocus(bool hasFocus)
-		{
-			SetCursorState(cursorLocked);
-		}
-
-		private void SetCursorState(bool newState)
-		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-		}
-
-#endif
-
-	}
+    }
 	

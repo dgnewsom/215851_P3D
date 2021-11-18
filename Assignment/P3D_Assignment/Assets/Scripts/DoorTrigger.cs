@@ -8,20 +8,20 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField] private DoorState doorState;
 
     private Door door;
-    private PlayerInput input;
+    private PlayerInputHandler inputHandler;
 
     // Start is called before the first frame update
     void Start()
     {
         door = GetComponentInParent<Door>();
-        input = FindObjectOfType<PlayerInput>();
+        inputHandler = FindObjectOfType<PlayerInputHandler>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (input.Interact)
+            if (inputHandler.Interact)
             {
                 if (door.CurrentState.Equals(DoorState.Closed))
                 {

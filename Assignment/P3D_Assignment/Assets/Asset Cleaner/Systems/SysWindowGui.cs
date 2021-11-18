@@ -66,7 +66,8 @@ namespace Asset_Cleaner {
                 var conf = Globals<Config>.Value;
                 return DirtyUtils.HashCode(conf.IgnorePathContainsCombined,
                     conf.IgnoreMaterial,
-                    conf.IgnoreScriptable);
+                    conf.IgnoreScriptable,
+                    conf.IgnoreSprite);
             }
         }
 
@@ -82,7 +83,8 @@ namespace Asset_Cleaner {
                 return DirtyUtils.HashCode(
                     conf.MarkRed,
                     conf.ShowInfoBox,
-                    conf.RebuildCacheOnDemand);
+                    conf.RebuildCacheOnDemand,
+                    conf.UpdateUnusedAssetsOnDemand);
             }
         }
 
@@ -98,16 +100,18 @@ namespace Asset_Cleaner {
                     conf.MarkRed = GUILayout.Toggle(conf.MarkRed, "Display counters and red overlay in Project View");
                     conf.ShowInfoBox = GUILayout.Toggle(conf.ShowInfoBox, "Help suggestions");
                     conf.RebuildCacheOnDemand = GUILayout.Toggle(conf.RebuildCacheOnDemand, "Rebuild cache on demand (when scripts are updated often)");
+                    conf.UpdateUnusedAssetsOnDemand = GUILayout.Toggle(conf.UpdateUnusedAssetsOnDemand, "Update unused assets on demand");
                     EditorGUILayout.Space();
-                    conf.IgnoreMaterial = GUILayout.Toggle(conf.IgnoreMaterial, "Ignore Materials");
-                    conf.IgnoreScriptable = GUILayout.Toggle(conf.IgnoreScriptable, "Ignore ScriptableObjects");
+                    conf.IgnoreMaterial = GUILayout.Toggle(conf.IgnoreMaterial, "Skip Materials");
+                    conf.IgnoreScriptable = GUILayout.Toggle(conf.IgnoreScriptable, "Skip ScriptableObjects");
+                    conf.IgnoreSprite = GUILayout.Toggle(conf.IgnoreSprite, "Skip Sprites");
                 }
 
                 EditorGUILayout.Space();
 
                 GUI.enabled = enabled;
 
-                EditorGUILayout.LabelField("Ignore Path(s) contains:");
+                EditorGUILayout.LabelField("Skip Path(s) contains:");
 
                 conf.IgnorePathContainsCombined = GUILayout.TextArea(conf.IgnorePathContainsCombined);
 
@@ -232,8 +236,12 @@ namespace Asset_Cleaner {
                 }
             }
 
-            if (arg == default)
+            if (arg == default) {
+                GUI.enabled = false;
+                GUILayout.TextArea("No items selected. Select an item in a scene or project.");
+                GUI.enabled = true;
                 return;
+            }
 
             var targetTypeEnum = GetTargetType(windowData, arg?.Main);
             BacklinkStore.UnusedQty unusedQty = new BacklinkStore.UnusedQty(0, 0, 0);
@@ -331,7 +339,7 @@ namespace Asset_Cleaner {
                 {
                     windowData2.ScrollPos = EditorGUILayout.BeginScrollView(windowData2.ScrollPos);
                     {
-                        RenderRows(windowData2); //TODO?
+                        RenderRows(windowData2); 
                         EditorGUILayout.Space();
                     }
                     EditorGUILayout.EndScrollView();
@@ -601,8 +609,8 @@ namespace Asset_Cleaner {
                 unusedAssets = unusedAssets.Distinct().ToList();
                 unusedScenes = unusedScenes.Distinct().ToList();
 
-                var assetSize = unusedAssets.Sum(CommonUtils.Size);
-                var sceneSize = unusedScenes.Sum(CommonUtils.Size);
+                var assetSize = unusedAssets.Sum(p => new FileInfo(p).Length);
+                var sceneSize = unusedScenes.Sum(p => new FileInfo(p).Length);
 
                 _contentBuf.text =
                     $"Assets: {unusedAssets.Count} ({CommonUtils.BytesToString(assetSize)}), Scenes: {unusedScenes.Count} ({CommonUtils.BytesToString(sceneSize)})";
