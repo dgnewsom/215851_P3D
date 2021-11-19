@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
         [SerializeField] private bool LockCursor = true;
 
         private PlayerInput input;
+        private DayNightController dayNightController;
 
         //Input Variables
         private Vector2 move;
@@ -47,6 +48,8 @@ using UnityEngine.InputSystem;
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
+
+            dayNightController = FindObjectOfType<DayNightController>();
         }
 
         public void OnControlsChanged()
@@ -62,7 +65,6 @@ using UnityEngine.InputSystem;
 		public void OnLook(InputValue value)
 		{
 			LookInput(value.Get<Vector2>());
-            print(value.Get<Vector2>());
 		}
 
 		public void OnJump(InputValue value)

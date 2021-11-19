@@ -1,0 +1,30 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DayNightController : MonoBehaviour
+{
+    [SerializeField] private bool isDaytime = false;
+
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    public void UpdateAnimator()
+    {
+        animator.SetBool("isDaytime",isDaytime);
+    }
+
+    internal void SetDaytime()
+    {
+        isDaytime = true;
+    }
+
+    internal void SetNighttime()
+    {
+        isDaytime = false;
+    }
+}
