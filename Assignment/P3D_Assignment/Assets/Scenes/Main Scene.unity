@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.087539315, g: 0.07096726, b: 0.053887367, a: 1}
+  m_IndirectSpecularColor: {r: 0.08748281, g: 0.07092875, b: 0.053855777, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee191c515a20b3043afdb09d4fd97f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDaytime: 0
+  isDaytime: 1
   dayProfile: {fileID: 11400000, guid: e67f0b2dc14800949bfa24cf5fc73560, type: 2}
   nightProfile: {fileID: 11400000, guid: 37ab06af5b5540e489fd5bd18e6aa4c0, type: 2}
 --- !u!1 &878258687
@@ -1065,6 +1065,10 @@ PrefabInstance:
     - target: {fileID: 3780002866373310845, guid: e3e803f9a93c2314a95319d5c9d71dd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4885819375061199126, guid: e3e803f9a93c2314a95319d5c9d71dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3e803f9a93c2314a95319d5c9d71dd0, type: 3}
