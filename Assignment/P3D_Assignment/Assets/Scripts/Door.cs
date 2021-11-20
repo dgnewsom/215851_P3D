@@ -12,6 +12,7 @@ public class Door : MonoBehaviour
 {
     [SerializeField] private bool isLocked = false;
     [SerializeField] private DoorState currentState = DoorState.Closed;
+    [SerializeField] private bool triggerDaytime = false;
 
     private Animator animator;
     private float coolDownDelay = 0.5f;
@@ -46,6 +47,10 @@ public class Door : MonoBehaviour
         {
             cooldownTimer = coolDownDelay;
             StartCoroutine(DoorStateDelay(autoCloseDelay,newState));
+            if (triggerDaytime)
+            {
+                FindObjectOfType<DayNightController>().SkipToDaytime();
+            }
         }
     }
 

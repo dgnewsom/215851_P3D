@@ -2,7 +2,10 @@ fileFormatVersion: 2
 guid: d29b56d1483edcd4f87b56a9d300d5b6
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: 1824386989293539057
+    second: Chandelier_Control|Sway
   externalObjects:
   - first:
       type: UnityEngine:Material
