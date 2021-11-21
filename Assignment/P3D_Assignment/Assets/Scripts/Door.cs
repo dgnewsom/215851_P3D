@@ -49,7 +49,11 @@ public class Door : MonoBehaviour
             StartCoroutine(DoorStateDelay(autoCloseDelay,newState));
             if (triggerDaytime)
             {
-                FindObjectOfType<DayNightController>().SkipToDaytime();
+                DayNightController dayNightController = FindObjectOfType<DayNightController>();
+                if (!dayNightController.IsDaytime)
+                {
+                    dayNightController.SkipToDaytime();
+                }
             }
         }
     }

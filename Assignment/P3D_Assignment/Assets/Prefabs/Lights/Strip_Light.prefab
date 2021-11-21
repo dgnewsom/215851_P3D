@@ -225,6 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8486633813964573910}
+  - component: {fileID: 4618481132700344241}
   m_Layer: 0
   m_Name: Strip_Light
   m_TagString: Untagged
@@ -248,6 +249,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4618481132700344241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8950899276362630639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c0de048139aec4db434f4ae97425a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickering: 1
+  flickerDelay: {x: 0.1, y: 5}
+  flickerOffTime: {x: 0.01, y: 0.1}
 --- !u!1001 &4247050283858930695
 PrefabInstance:
   m_ObjectHideFlags: 0

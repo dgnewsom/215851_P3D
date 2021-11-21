@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405232153589562317}
+  - component: {fileID: 2360767863255692385}
   m_Layer: 0
   m_Name: Chandelier
   m_TagString: Untagged
@@ -31,6 +32,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2360767863255692385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405232153589562306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c0de048139aec4db434f4ae97425a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flickering: 1
+  flickerDelay: {x: 0.5, y: 5}
+  flickerOffTime: {x: 0.01, y: 0.1}
 --- !u!1 &5067190229663239472
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +92,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -292,7 +308,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -508,7 +524,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -724,7 +740,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -940,7 +956,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1156,7 +1172,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 1, g: 0.8321187, b: 0.0141509175, a: 1}
   m_Intensity: 136.23663
-  m_Range: 10
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10

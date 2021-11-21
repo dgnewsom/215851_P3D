@@ -11,16 +11,18 @@ public class DayNightController : MonoBehaviour
     [SerializeField] private VolumeProfile dayProfile;
     [SerializeField] private VolumeProfile nightProfile;
     
-    private Light[] lights;
+    private LightBulb[] lights;
     private Volume volume;
     private Animator animator;
     private float animationSpeed;
+
+    public bool IsDaytime => isDaytime;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         volume = GetComponentInChildren<Volume>();
-        lights = FindObjectsOfType<Light>();
+        lights = FindObjectsOfType<LightBulb>();
         animationSpeed = animator.GetFloat("Speed");
         SetNighttime();
     }
@@ -73,23 +75,17 @@ public class DayNightController : MonoBehaviour
 
     public void EnableHouseLights()
     {
-        foreach (var light in lights)
+        foreach (LightBulb light in lights)
         {
-            if (light.gameObject.name != "Moon" && light.gameObject.name != "Sun")
-            {
-                light.enabled = true;
-            }
+            light.enabled = true;
         }
     }
     
     public void DisableHouseLights()
     {
-        foreach (var light in lights)
+        foreach (LightBulb light in lights)
         {
-            if (light.gameObject.name != "Moon" && light.gameObject.name != "Sun")
-            {
-                light.enabled = false;
-            }
+            light.enabled = false;
         }
         
     }
