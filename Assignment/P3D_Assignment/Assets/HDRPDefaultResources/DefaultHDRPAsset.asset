@@ -302,7 +302,7 @@ MonoBehaviour:
       maxDirectionalShadowMapResolution: 2048
       maxPunctualShadowMapResolution: 2048
       maxAreaShadowMapResolution: 2048
-      supportScreenSpaceShadows: 0
+      supportScreenSpaceShadows: 1
       maxScreenSpaceShadowSlots: 4
       screenSpaceShadowBufferFormat: 48
     decalSettings:
@@ -371,7 +371,7 @@ MonoBehaviour:
       AOMaximumRadiusPixels: 200000002000000028000000
       AOBilateralUpsample: 000001
       AODirectionCount: 010000000200000002000000
-      ContactShadowSampleCount: 04000000080000000c000000
+      ContactShadowSampleCount: 040000000800000018000000
       SSRMaxRaySteps: 0c0000001800000030000000
       RTAORayLength:
       - 0.5
