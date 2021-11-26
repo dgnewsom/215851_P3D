@@ -1,39 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private DoorState doorState;
 
-    private Door door;
-    private PlayerInputHandler inputHandler;
+    private Door _door;
+    private PlayerInputHandler _inputHandler;
 
     // Start is called before the first frame update
     void Start()
     {
-        door = GetComponentInParent<Door>();
-        inputHandler = FindObjectOfType<PlayerInputHandler>();
+        _door = GetComponentInParent<Door>();
+        _inputHandler = FindObjectOfType<PlayerInputHandler>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            if (inputHandler.Interact)
+            if (_inputHandler.Interact)
             {
-                if (door.CurrentState.Equals(DoorState.Closed))
+                if (_door.CurrentState.Equals(DoorState.Closed))
                 {
-                    door.SetDoorState(doorState);
+                    _door.SetDoorState(doorState);
                 }
-                else if (door.CurrentState.Equals(doorState))
+                else if (_door.CurrentState.Equals(doorState))
                 {
-                    door.SetDoorState(DoorState.Closed);
+                    _door.SetDoorState(DoorState.Closed);
                 }
                 else
                 {
-                    door.SetDoorState(DoorState.Closed);
+                    _door.SetDoorState(DoorState.Closed);
                 }
                 
             }
@@ -42,7 +39,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        door.SetDoorState(DoorState.Closed, 3f);
+        _door.SetDoorState(DoorState.Closed, 3f);
     }
 
 

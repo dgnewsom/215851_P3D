@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum DoorState
@@ -10,42 +9,43 @@ public enum DoorState
 }
 public class Door : MonoBehaviour
 {
-    [SerializeField] private bool isLocked = false;
-    [SerializeField] private DoorState currentState = DoorState.Closed;
-    [SerializeField] private bool triggerDaytime = false;
+    [SerializeField] private bool isLocked;
+    [SerializeField] private bool triggerDaytime;
 
-    private Animator animator;
-    private float coolDownDelay = 0.5f;
-    private float cooldownTimer = 0;
+    private DoorState _currentState = DoorState.Closed;
+    private Animator _animator;
+    private readonly float coolDownDelay = 0.5f;
+    private float _cooldownTimer;
+    private static readonly int OpenState = Animator.StringToHash("OpenState");
 
-    public DoorState CurrentState => currentState;
+    public DoorState CurrentState => _currentState;
 
 
     // Start is called before the first frame update
     private void Start()
     {
-        animator = GetComponentInChildren<Animator>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     private void FixedUpdate()
     {
-        if (cooldownTimer == 0f){return;}
+        if (_cooldownTimer == 0f){return;}
         
-        cooldownTimer -= Time.deltaTime;
+        _cooldownTimer -= Time.deltaTime;
 
-        if (cooldownTimer <= 0f)
+        if (_cooldownTimer <= 0f)
         {
-            cooldownTimer = 0f;
-            SetDoorState(currentState);
+            _cooldownTimer = 0f;
+            SetDoorState(_currentState);
         }
     }
 
     internal void SetDoorState(DoorState newState, float autoCloseDelay = 0f)
     {
-        if(cooldownTimer > 0){return;}
-        if (!isLocked && currentState != newState)
+        if(_cooldownTimer > 0){return;}
+        if (!isLocked && _currentState != newState)
         {
-            cooldownTimer = coolDownDelay;
+            _cooldownTimer = coolDownDelay;
             StartCoroutine(DoorStateDelay(autoCloseDelay,newState));
             if (triggerDaytime)
             {
@@ -61,7 +61,7 @@ public class Door : MonoBehaviour
     private IEnumerator DoorStateDelay(float delay, DoorState newState)
     {
         yield return new WaitForSeconds(delay);
-        currentState = newState;
-        animator.SetInteger("OpenState",(int)currentState);
+        _currentState = newState;
+        _animator.SetInteger(OpenState,(int)_currentState);
     }
 }
