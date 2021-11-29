@@ -19,7 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
     private bool _jump;
     private bool _sprint;
     private bool _interact;
-    private bool _grab;
+    private bool _throw;
 
     //Public getters and setters
     public Vector2 Move => _move;
@@ -35,7 +35,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool Interact => _interact;
 
-    public bool Grab => _grab;
+    public bool Throw => _throw;
 
     public bool AnalogMovement => analogMovement;
 
@@ -78,9 +78,9 @@ public class PlayerInputHandler : MonoBehaviour
 		InteractInput(value.isPressed);
     }
 
-    public void OnGrab(InputValue value)
+    public void OnThrow(InputValue value)
     {
-        GrabInput(value.isPressed);
+        ThrowInput(value.isPressed);
     }
 
     private void MoveInput(Vector2 newMoveDirection)
@@ -108,9 +108,9 @@ public class PlayerInputHandler : MonoBehaviour
         _interact = newInteractState;
     }
 
-    private void GrabInput(bool newGrabState)
+    private void ThrowInput(bool newThrowState)
     {
-        _grab = newGrabState;
+        _throw = newThrowState;
     }
 }
 	

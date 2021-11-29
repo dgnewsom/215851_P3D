@@ -6,7 +6,11 @@ public class DayNightController : MonoBehaviour
     [SerializeField] private bool isDaytime;
     [SerializeField] private VolumeProfile dayProfile;
     [SerializeField] private VolumeProfile nightProfile;
-    
+    [SerializeField] private AudioClip nightAmbientSound;
+    [SerializeField] private AudioClip dayAmbientSound;
+
+
+    private AudioSource _outsideAudioSource;
     private LightBulb[] _lights;
     private Volume _volume;
     private Animator _animator;
@@ -22,6 +26,7 @@ public class DayNightController : MonoBehaviour
         _volume = GetComponentInChildren<Volume>();
         _lights = FindObjectsOfType<LightBulb>();
         _animationSpeed = _animator.GetFloat(Speed);
+        _outsideAudioSource = GetComponent<AudioSource>();
         SetNighttime();
     }
 
@@ -33,6 +38,8 @@ public class DayNightController : MonoBehaviour
     private void SetDaytime()
     {
         isDaytime = true;
+        _outsideAudioSource.clip = dayAmbientSound;
+        _outsideAudioSource.Play();
         _volume.profile = dayProfile;
         UpdateAnimator();
     }
@@ -40,6 +47,8 @@ public class DayNightController : MonoBehaviour
     private void SetNighttime()
     {
         isDaytime = false;
+        _outsideAudioSource.clip = nightAmbientSound;
+        _outsideAudioSource.Play();
         _volume.profile = nightProfile;
         UpdateAnimator();
     }

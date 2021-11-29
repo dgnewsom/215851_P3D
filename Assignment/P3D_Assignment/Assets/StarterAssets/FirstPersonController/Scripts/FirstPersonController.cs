@@ -72,6 +72,18 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 
 		private const float _threshold = 0.01f;
+		
+		//Footsteps sounds
+		// Exposed audio variables
+		[Header("Audio")]
+		[Tooltip("An array of footstep sounds. One gets randonly selected to play")]
+		[SerializeField] private AudioClip[] footstepSounds;    
+		[Tooltip("Effects the gap between footstep sounds. Smaller number = smaller gap")]
+		[Min(1.0f)] [SerializeField] private float stepRate = 1.0f;
+
+		// Private audio variables
+		private float nextStep = 0.0f;
+		private AudioSource audioSource;
 
 		private void Awake()
 		{
@@ -90,6 +102,8 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			
+			audioSource = GetComponent<AudioSource>();
 		}
 
 		private void Update()
@@ -175,6 +189,9 @@ namespace StarterAssets
 
 			// move the player
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			
+			PlayFootStepAudio();
+			
 		}
 
 		private void JumpAndGravity()
@@ -242,6 +259,28 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+		
+		private void PlayFootStepAudio()
+		{
+			// Debug.Log("Next " + nextStep);
+			if (Grounded && _speed > 0.0f && Time.time > nextStep)
+			{
+				// Debug.Log("Time " + Time.time);
+				float offset = _speed;
+				if ( _speed >= stepRate ) {
+					offset = (stepRate / _speed);
+				} 
+				nextStep = Time.time + offset;
+				// pick & play a random footstep sound from the array,
+				// excluding sound at index 0
+				int n = Random.Range(1, footstepSounds.Length);
+				audioSource.clip = footstepSounds[n];
+				audioSource.PlayOneShot(audioSource.clip);
+				// move picked sound to index 0 so it's not picked next time
+				footstepSounds[n] = footstepSounds[0];
+				footstepSounds[0] = audioSource.clip;
+			}    
 		}
 	}
 }

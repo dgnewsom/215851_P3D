@@ -1,1 +1,10 @@
 clock tick - https://freesound.org/people/straget/sounds/456236/
+wind - https://freesound.org/people/nsstudios/sounds/479192/
+birdsong - https://freesound.org/people/Imjeax/sounds/427400/
+wolfsounds - https://freesound.org/people/y89312/sounds/139924/
+	   - https://freesound.org/people/killyourpepe/sounds/395192/
+	   - https://freesound.org/people/cazadordoblekatana/sounds/429109/
+ 	   - https://freesound.org/people/newagesoup/sounds/338674/
+	   - https://freesound.org/people/NaturesTemper/sounds/398430/
+Footstep sound / code - https://github.com/glowkeeper/P3D
+cuckoo sound - https://freesound.org/people/InspectorJ/sounds/398194/

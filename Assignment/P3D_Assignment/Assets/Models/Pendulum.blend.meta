@@ -10,6 +10,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Dangler
+    second: {fileID: 2100000, guid: b9d14e9c38e6a8248b79c0db259db388, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Pendulum
     second: {fileID: 2100000, guid: e4ad91211a132bf44b24470adb369de8, type: 2}
   materials:
@@ -44,7 +49,7 @@ ModelImporter:
       takeName: Scene
       internalID: 0
       firstFrame: 1
-      lastFrame: 50
+      lastFrame: 150
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
