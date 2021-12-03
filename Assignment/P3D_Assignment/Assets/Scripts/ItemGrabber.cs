@@ -27,7 +27,7 @@ public class ItemGrabber : MonoBehaviour
             {
                 if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo,
                     raycastDistance,
-                    pickupLayerMask, QueryTriggerInteraction.Ignore)) return;
+                    pickupLayerMask, QueryTriggerInteraction.Collide)) return;
                 currentItem = hitInfo.transform.gameObject;
                 currentItem.GetComponent<Rigidbody>().isKinematic = true;
                 currentItem.GetComponent<Collider>().enabled = false;

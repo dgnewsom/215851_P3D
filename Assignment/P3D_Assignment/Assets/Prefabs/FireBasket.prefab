@@ -276,10 +276,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfa6a9e538b8644eaadb24f8afe7d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerEvent:
-    m_PersistentCalls:
-      m_Calls: []
   fireEffect: {fileID: 8603170964939124832}
+  vaseCollectable: {fileID: 0}
 --- !u!1 &8148618173312942687
 GameObject:
   m_ObjectHideFlags: 0

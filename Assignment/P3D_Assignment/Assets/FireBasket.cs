@@ -9,8 +9,8 @@ using Random = UnityEngine.Random;
 
 public class FireBasket : MonoBehaviour
 {
-    [SerializeField] private UnityEvent triggerEvent;
     [SerializeField] private VisualEffect fireEffect;
+    [SerializeField] private GameObject vaseCollectable;
     
     private PickupType triggerObject;
     private Light fireGlow;
@@ -43,5 +43,11 @@ public class FireBasket : MonoBehaviour
         fireEffect.SetVector3("MinVelocity",new Vector3(0.5f,1.5f,0.25f));
         fireEffect.SetVector3("MaxVelocity",new Vector3(0.5f,2f,0.25f));
         fireEffect.SetFloat("BaseSize",0.75f);
+        Invoke(nameof(EnableVase),0.5f);
+    }
+
+    private void EnableVase()
+    {
+        vaseCollectable.SetActive(true);
     }
 }
