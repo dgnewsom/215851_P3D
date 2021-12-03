@@ -1,9 +1,9 @@
+using System;
 using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
 {
     [SerializeField] private DoorState doorState;
-    [SerializeField] private bool toggleInsideOutside;
     
     private Door _door;
     private PlayerInputHandler _inputHandler;

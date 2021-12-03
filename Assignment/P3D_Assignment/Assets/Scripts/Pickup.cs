@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PickupType
+{
+    Cuckoo,
+    Vase
+}
+
 public class Pickup : MonoBehaviour
 {
     [SerializeField] private PickupType _pickupType;

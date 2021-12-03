@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Vase : MonoBehaviour
 {
-    [SerializeField] private Material vaseMaterial;
     [SerializeField] private GameObject vaseModel;
     [SerializeField] private GameObject brokenVaseModel;
     [SerializeField] private GameObject keyCollectible;
-    
+
+    private Material vaseMaterial;
     private float shaderProgress = 1;
     private bool isAppearing = false;
     private float smashForce = 8f;
@@ -29,7 +29,7 @@ public class Vase : MonoBehaviour
 
     private void OnEnable()
     {
-        vaseMaterial = GetComponentInChildren<Renderer>().material;
+        vaseMaterial = vaseModel.GetComponentInChildren<Renderer>().material;
         shaderProgress = 1;
         vaseMaterial.SetFloat("_Progress",shaderProgress);
         isAppearing = true;
@@ -49,7 +49,8 @@ public class Vase : MonoBehaviour
     private void SmashVase()
     {
         vaseModel.SetActive(false);
+        GetComponent<Collider>().enabled = false;
         brokenVaseModel.SetActive(true);
-        //keyCollectible.SetActive(true);
+        keyCollectible.SetActive(true);
     }
 }

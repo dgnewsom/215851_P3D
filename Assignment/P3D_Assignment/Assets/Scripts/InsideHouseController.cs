@@ -9,7 +9,9 @@ public class InsideHouseController : MonoBehaviour
     [SerializeField] private AudioSource[] insideAudioSource;
 
     private bool _isInside = false;
-    
+
+    public bool IsInside => _isInside;
+
     private void Start()
     {
         SetInside(_isInside);

@@ -28,9 +28,16 @@ public class ItemGrabber : MonoBehaviour
                 if (!Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo,
                     raycastDistance,
                     pickupLayerMask, QueryTriggerInteraction.Collide)) return;
-                currentItem = hitInfo.transform.gameObject;
-                currentItem.GetComponent<Rigidbody>().isKinematic = true;
-                currentItem.GetComponent<Collider>().enabled = false;
+                if (hitInfo.transform.CompareTag("Pickup"))
+                {
+                    currentItem = hitInfo.transform.gameObject;
+                    currentItem.GetComponent<Rigidbody>().isKinematic = true;
+                    currentItem.GetComponent<Collider>().enabled = false;
+                }
+                else if (hitInfo.transform.CompareTag("Key"))
+                {
+                    
+                }
             }
             else
             {
