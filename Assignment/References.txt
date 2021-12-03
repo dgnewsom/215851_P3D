@@ -8,3 +8,4 @@ wolfsounds - https://freesound.org/people/y89312/sounds/139924/
 	   - https://freesound.org/people/NaturesTemper/sounds/398430/
 Footstep sound / code - https://github.com/glowkeeper/P3D
 cuckoo sound - https://freesound.org/people/InspectorJ/sounds/398194/
+smoke sprite sheet - https://opengameart.org/content/smoke-aura
