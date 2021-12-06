@@ -13,7 +13,7 @@ public class Door : MonoBehaviour
     [SerializeField] private bool isLocked;
     [SerializeField] private bool lockOnEntry;
     [SerializeField] private bool triggerDaytime;
-    [SerializeField] private KeyType _keyType;
+    [SerializeField] private KeyType keyType;
 
     private DoorState _currentState = DoorState.Closed;
     private Animator _animator;
@@ -21,9 +21,14 @@ public class Door : MonoBehaviour
     private float _cooldownTimer;
     private static readonly int OpenState = Animator.StringToHash("OpenState");
     private KeyManager _keyManager;
-    private TMP_Text[] _doorTexts;
+    private DoorTexts _doorTexts;
+    
 
     public DoorState CurrentState => _currentState;
+
+    public bool IsLocked => isLocked;
+
+    public KeyType Type => keyType;
 
 
     // Start is called before the first frame update
@@ -31,8 +36,7 @@ public class Door : MonoBehaviour
     {
         _animator = GetComponentInChildren<Animator>();
         _keyManager = FindObjectOfType<KeyManager>();
-        _doorTexts = GetComponentsInChildren<TMP_Text>();
-        ClearDoorText();
+        _doorTexts = GetComponentInChildren<DoorTexts>();
     }
 
     private void FixedUpdate()
@@ -54,7 +58,7 @@ public class Door : MonoBehaviour
 
         if (isLocked)
         {
-            if (_keyManager.CheckIfKeyHeld(_keyType))
+            if (_keyManager.CheckIfKeyHeld(keyType))
             {
                 isLocked = false;
                 print("implement lock sounds!");
@@ -62,7 +66,7 @@ public class Door : MonoBehaviour
         }
         if (!isLocked && _currentState != newState)
         {
-            ClearDoorText();
+            _doorTexts.ClearDoorText();
             _cooldownTimer = coolDownDelay;
             StartCoroutine(DoorStateDelay(autoCloseDelay,newState));
             if (triggerDaytime)
@@ -84,31 +88,6 @@ public class Door : MonoBehaviour
         if (lockOnEntry == true && FindObjectOfType<InsideHouseController>().IsInside && newState.Equals(DoorState.Closed))
         {
             isLocked = true;
-        }
-    }
-
-    public void SetDoorText()
-    {
-        if (isLocked)
-        {
-            UpdateDoorText($"{KeyManager.GetKeyName(_keyType)}\nkey\nRequired");
-        }
-        else
-        {
-            UpdateDoorText("LMB to open");
-        }
-    }
-
-    public void ClearDoorText()
-    {
-        UpdateDoorText("");
-    }
-    
-    private void UpdateDoorText(string newDoorText)
-    {
-        foreach (TMP_Text doorText in _doorTexts)
-        {
-            doorText.text = newDoorText;
         }
     }
 }

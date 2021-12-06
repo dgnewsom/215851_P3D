@@ -8,8 +8,9 @@ public class ItemGrabber : MonoBehaviour
     [SerializeField] private LayerMask pickupLayerMask;
     [SerializeField] private float raycastDistance = 5f;
     [SerializeField] private Transform cameraTransform;
-
     [SerializeField] [Range(0f,20f)] private float throwForce = 10f;
+    
+    private KeyManager _keyManager;
     private PlayerInputHandler _playerInputHandler;
     private GameObject currentItem;
 
@@ -17,6 +18,7 @@ public class ItemGrabber : MonoBehaviour
     void Start()
     {
         _playerInputHandler = FindObjectOfType<PlayerInputHandler>();
+        _keyManager = FindObjectOfType<KeyManager>();
     }
 
     private void Update()
@@ -36,7 +38,11 @@ public class ItemGrabber : MonoBehaviour
                 }
                 else if (hitInfo.transform.CompareTag("Key"))
                 {
-                    
+                    if (hitInfo.transform.TryGetComponent<Key>(out Key key))
+                    {
+                        _keyManager.AddKey(key.DoorToOpen);
+                        Destroy(hitInfo.transform.gameObject);
+                    }
                 }
             }
             else

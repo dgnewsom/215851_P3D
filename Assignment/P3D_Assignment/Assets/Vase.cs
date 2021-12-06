@@ -12,7 +12,7 @@ public class Vase : MonoBehaviour
     private Material vaseMaterial;
     private float shaderProgress = 1;
     private bool isAppearing = false;
-    private float smashForce = 8f;
+    private float smashForce = 9f;
     
     private void Update()
     {

@@ -16,20 +16,28 @@ public enum KeyType
 
 public class KeyManager : MonoBehaviour
 {
-    private List<Key> keysFound = new List<Key>();
+    private List<KeyType> keysFound = new List<KeyType>();
     private UIController _uiController;
 
-    public void AddKey(Key keyToAdd)
+    private void Start()
     {
-        keysFound.Add(keyToAdd);
-        _uiController.UpdateKeys();
+        _uiController = FindObjectOfType<UIController>();
+    }
+
+    public void AddKey(KeyType keyToAdd)
+    {
+        if (!keysFound.Contains(keyToAdd))
+        {
+            keysFound.Add(keyToAdd);
+            _uiController.UpdateKeys(keysFound);
+        }
     }
 
     public bool CheckIfKeyHeld(KeyType keyToCheck)
     {
-        foreach (Key key in keysFound)
+        foreach (KeyType key in keysFound)
         {
-            if (key.DoorToOpen.Equals(keyToCheck))
+            if (key.Equals(keyToCheck))
             {
                 return true;
             }
@@ -44,10 +52,8 @@ public class KeyManager : MonoBehaviour
         {
             case KeyType.BackDoor:
                 return "Back Door";
-                break;
             case KeyType.FrontDoor:
                 return "Front Door";
-                break;
             default:
                 return keyType.ToString();
         }
