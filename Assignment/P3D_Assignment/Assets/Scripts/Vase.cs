@@ -52,5 +52,14 @@ public class Vase : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         brokenVaseModel.SetActive(true);
         keyCollectible.SetActive(true);
+        Invoke(nameof(RemoveVelocity),0.5f);
+    }
+
+    private void RemoveVelocity()
+    {
+        foreach (Rigidbody rb in GetComponents<Rigidbody>())
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 }

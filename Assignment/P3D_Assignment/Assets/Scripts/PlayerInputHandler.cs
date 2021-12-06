@@ -20,6 +20,8 @@ public class PlayerInputHandler : MonoBehaviour
     private bool _sprint;
     private bool _interact;
     private bool _throw;
+    private bool _nextItem;
+    private bool _previousItem;
 
     //Public getters and setters
     public Vector2 Move => _move;
@@ -39,6 +41,10 @@ public class PlayerInputHandler : MonoBehaviour
 
     public bool AnalogMovement => analogMovement;
 
+    public bool NextItem => _nextItem;
+
+    public bool PreviousItem => _previousItem;
+
     private void Start()
     {
         _input = GetComponent<PlayerInput>();
@@ -55,62 +61,42 @@ public class PlayerInputHandler : MonoBehaviour
 
 	public void OnMove(InputValue value)
 	{
-		MoveInput(value.Get<Vector2>());
+		_move = value.Get<Vector2>();
 	}
 
 	public void OnLook(InputValue value)
 	{
-		LookInput(value.Get<Vector2>());
+		_look = value.Get<Vector2>();
 	}
 
 	public void OnJump(InputValue value)
 	{
-		JumpInput(value.isPressed);
+		_jump = value.isPressed;
 	}
 
 	public void OnSprint(InputValue value)
 	{
-		SprintInput(value.isPressed);
+		_sprint = value.isPressed;
 	}
 
     public void OnInteract(InputValue value)
     {
-		InteractInput(value.isPressed);
+	    _interact = value.isPressed;
     }
 
     public void OnThrow(InputValue value)
     {
-        ThrowInput(value.isPressed);
+	    _throw = value.isPressed;
     }
-
-    private void MoveInput(Vector2 newMoveDirection)
-	{
-		_move = newMoveDirection;
-	} 
-
-    private void LookInput(Vector2 newLookDirection)
-	{
-		_look = newLookDirection;
-	}
-
-    private void JumpInput(bool newJumpState)
-	{
-		_jump = newJumpState;
-	}
-
-    private void SprintInput(bool newSprintState)
-	{
-		_sprint = newSprintState;
-	}
     
-    private void InteractInput(bool newInteractState)
+    public void OnNextItem(InputValue value)
     {
-        _interact = newInteractState;
+	    _nextItem = value.isPressed;
     }
-
-    private void ThrowInput(bool newThrowState)
+    
+    public void OnPreviousItem(InputValue value)
     {
-        _throw = newThrowState;
+	    _previousItem = value.isPressed;
     }
 }
 	

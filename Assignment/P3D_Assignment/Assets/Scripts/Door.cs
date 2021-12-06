@@ -22,6 +22,7 @@ public class Door : MonoBehaviour
     private static readonly int OpenState = Animator.StringToHash("OpenState");
     private KeyManager _keyManager;
     private DoorTexts _doorTexts;
+    private DoorSounds _doorSounds;
     
 
     public DoorState CurrentState => _currentState;
@@ -37,6 +38,7 @@ public class Door : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         _keyManager = FindObjectOfType<KeyManager>();
         _doorTexts = GetComponentInChildren<DoorTexts>();
+        _doorSounds = GetComponentInChildren<DoorSounds>();
     }
 
     private void FixedUpdate()
@@ -58,10 +60,11 @@ public class Door : MonoBehaviour
 
         if (isLocked)
         {
-            if (_keyManager.CheckIfKeyHeld(keyType))
+            if (_keyManager.CheckIfKeyHeld(keyType) && newState != DoorState.Closed)
             {
                 isLocked = false;
-                print("implement lock sounds!");
+                _doorSounds.PlayDoorUnlockSound();
+                _doorTexts.SetDoorText();
             }
         }
         if (!isLocked && _currentState != newState)
@@ -85,9 +88,12 @@ public class Door : MonoBehaviour
         yield return new WaitForSeconds(delay);
         _currentState = newState;
         _animator.SetInteger(OpenState,(int)_currentState);
-        if (lockOnEntry == true && FindObjectOfType<InsideHouseController>().IsInside && newState.Equals(DoorState.Closed))
-        {
-            isLocked = true;
-        }
+    }
+
+    public void LockDoor()
+    {
+        if (isLocked) return;
+        isLocked = true;
+        StartCoroutine(DoorStateDelay(0,DoorState.Closed));
     }
 }

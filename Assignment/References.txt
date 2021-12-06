@@ -9,3 +9,6 @@ wolfsounds - https://freesound.org/people/y89312/sounds/139924/
 Footstep sound / code - https://github.com/glowkeeper/P3D
 cuckoo sound - https://freesound.org/people/InspectorJ/sounds/398194/
 smoke sprite sheet - https://opengameart.org/content/smoke-aura
+Door Close sound - https://freesound.org/people/rivernile7/sounds/234244/
+Door Open Sound - https://freesound.org/people/pagancow/sounds/15419/
+Door Lock / Unlock - https://freesound.org/people/Fabrizio84/sounds/458013/
