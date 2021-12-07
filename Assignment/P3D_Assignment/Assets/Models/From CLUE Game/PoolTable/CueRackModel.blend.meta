@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a00ab0aff4b5e904b977a1d4c2c72259
+guid: dd635c5add7648b489e2f6cde998a0d6
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,28 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: CupboardWhite
-    second: {fileID: 2100000, guid: 94ca5e12b2685df42a1cb3a66f002c1e, type: 2}
+      name: BlackPlastic
+    second: {fileID: 2100000, guid: 377f52226fa76ca41bcac592d3268769, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Gaps
-    second: {fileID: 2100000, guid: 32b731e18042f484e908ef5d0ea2a59c, type: 2}
+      name: Cue
+    second: {fileID: 2100000, guid: c7f44e0d326e4bd43b3e23b3d5c466be, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Handles
+      name: Metal
     second: {fileID: 2100000, guid: b640350462b0e1b4687c6a4575e752a1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Sink
-    second: {fileID: 2100000, guid: b640350462b0e1b4687c6a4575e752a1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Worktop
-    second: {fileID: 2100000, guid: eb9a93c0ef4f7b14fa594b18c8a9168b, type: 2}
+      name: Wood
+    second: {fileID: 2100000, guid: a185324e1cd24474fa16a3c2a73fcf66, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
