@@ -10,13 +10,13 @@ public class ItemGrabber : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] [Range(0f,20f)] private float throwForce = 10f;
 
-    private List<GameObject> heldItems = new List<GameObject>();
+    private readonly List<GameObject> _heldItems = new List<GameObject>();
     private KeyManager _keyManager;
     private PlayerInputHandler _playerInputHandler;
     private UIController _uiController;
-    private GameObject currentItem;
-    private int currentItemIndex = 0;
-    private bool inCooldown = false;
+    private GameObject _currentItem;
+    private int _currentItemIndex = 0;
+    private bool _inCooldown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +46,7 @@ public class ItemGrabber : MonoBehaviour
             _uiController.SetInfoDisplay("");
         }
 
-        if(inCooldown){return;}
+        if(_inCooldown){return;}
         
         if (_playerInputHandler.Throw)
         {
@@ -60,46 +60,45 @@ public class ItemGrabber : MonoBehaviour
                         _keyManager.AddKey(key.DoorToOpen);
                         Destroy(hitInfo.transform.gameObject);
                     }
-                    inCooldown = true;
+                    _inCooldown = true;
                     Invoke(nameof(ResetCooldown),0.2f);
                     return;
                 }
 
-                if (!hitInfo.transform.CompareTag("Pickup") || heldItems.Contains(hitInfo.transform.gameObject)) return;
-                currentItem = hitInfo.transform.gameObject;
-                heldItems.Add(currentItem);
-                currentItemIndex = heldItems.IndexOf(currentItem);
+                if (!hitInfo.transform.CompareTag("Pickup") || _heldItems.Contains(hitInfo.transform.gameObject)) return;
+                _currentItem = hitInfo.transform.gameObject;
+                _heldItems.Add(_currentItem);
+                _currentItemIndex = _heldItems.IndexOf(_currentItem);
                 SetActiveObject();
-                currentItem.GetComponent<Rigidbody>().isKinematic = true;
-                currentItem.GetComponent<Collider>().enabled = false;
-                currentItem.transform.parent = transform;
-                currentItem.transform.position = transform.position;
-                currentItem.transform.rotation = transform.rotation;
-                inCooldown = true;
+                _currentItem.GetComponent<Rigidbody>().isKinematic = true;
+                _currentItem.GetComponent<Collider>().enabled = false;
+                _currentItem.transform.parent = transform;
+                _currentItem.transform.position = transform.position;
+                _currentItem.transform.rotation = transform.rotation;
+                _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);
             }
             else
             {
-                if (!currentItem) return;
-                GameObject itemToThrow = currentItem;
-                print($"Throw {itemToThrow.name}");
-                heldItems.Remove(itemToThrow);
-                if (heldItems.Count > 0)
+                if (!_currentItem) return;
+                GameObject itemToThrow = _currentItem;
+                _heldItems.Remove(itemToThrow);
+                if (_heldItems.Count > 0)
                 {
-                    currentItem = heldItems[heldItems.Count - 1];
-                    currentItemIndex = heldItems.IndexOf(currentItem);
+                    _currentItem = _heldItems[_heldItems.Count - 1];
+                    _currentItemIndex = _heldItems.IndexOf(_currentItem);
                     SetActiveObject();
                 }
                 else
                 {
-                    currentItem = null;
+                    _currentItem = null;
                 }
                 itemToThrow.transform.parent = null;
                 itemToThrow.GetComponent<Collider>().enabled = true;
                 itemToThrow.TryGetComponent<Rigidbody>(out Rigidbody itemRb);
                 itemRb.isKinematic = false;
                 itemRb.AddForce(cameraTransform.forward * throwForce * 100f, ForceMode.Acceleration);
-                inCooldown = true;
+                _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);
             }
         }
@@ -118,60 +117,60 @@ public class ItemGrabber : MonoBehaviour
 
     private void NextItem()
     {
-        int numberOfItems = heldItems.Count;
+        int numberOfItems = _heldItems.Count;
         if(numberOfItems <= 1){return;}
-        if (currentItemIndex == numberOfItems-1)
+        if (_currentItemIndex == numberOfItems-1)
         {
-            currentItemIndex = 0;
+            _currentItemIndex = 0;
         }
         else
         {
-            currentItemIndex++;
+            _currentItemIndex++;
         }
-        currentItem = heldItems[currentItemIndex];
+        _currentItem = _heldItems[_currentItemIndex];
         SetActiveObject();
-        inCooldown = true;
+        _inCooldown = true;
         Invoke(nameof(ResetCooldown),0.2f);
     }
 
     private void PreviousItem()
     {
-        int numberOfItems = heldItems.Count;
+        int numberOfItems = _heldItems.Count;
         if(numberOfItems <= 1){return;}
 
-        if (currentItemIndex == 0)
+        if (_currentItemIndex == 0)
         {
-            currentItemIndex = numberOfItems - 1;
+            _currentItemIndex = numberOfItems - 1;
         }
         else
         {
-            currentItemIndex--;
+            _currentItemIndex--;
         }
-        currentItem = heldItems[currentItemIndex];
+        _currentItem = _heldItems[_currentItemIndex];
         SetActiveObject();
-        inCooldown = true;
+        _inCooldown = true;
         Invoke(nameof(ResetCooldown),0.2f);
     }
 
     private void SetActiveObject()
     {
-        if (heldItems.Count <= 0) return;
+        if (_heldItems.Count <= 0) return;
 
-        for (int i = 0; i < heldItems.Count; i++)
+        for (int i = 0; i < _heldItems.Count; i++)
         {
-            if (i == currentItemIndex)
+            if (i == _currentItemIndex)
             {
-                heldItems[i].SetActive(true);
+                _heldItems[i].SetActive(true);
             }
             else
             {
-                heldItems[i].SetActive(false);
+                _heldItems[i].SetActive(false);
             }
         }
     }
 
     private void ResetCooldown()
     {
-        inCooldown = false;
+        _inCooldown = false;
     }
 }
