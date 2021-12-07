@@ -9,10 +9,11 @@ public class ItemGrabber : MonoBehaviour
     [SerializeField] private float raycastDistance = 5f;
     [SerializeField] private Transform cameraTransform;
     [SerializeField] [Range(0f,20f)] private float throwForce = 10f;
-    
+
+    private List<GameObject> heldItems = new List<GameObject>();
     private KeyManager _keyManager;
     private PlayerInputHandler _playerInputHandler;
-    private List<GameObject> heldItems = new List<GameObject>();
+    private UIController _uiController;
     private GameObject currentItem;
     private int currentItemIndex = 0;
     private bool inCooldown = false;
@@ -22,17 +23,36 @@ public class ItemGrabber : MonoBehaviour
     {
         _playerInputHandler = FindObjectOfType<PlayerInputHandler>();
         _keyManager = FindObjectOfType<KeyManager>();
+        _uiController = FindObjectOfType<UIController>();
     }
 
     private void Update()
     {
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo,
+            raycastDistance,
+            pickupLayerMask, QueryTriggerInteraction.Collide))
+        {
+            if (hitInfo.transform.TryGetComponent<Key>(out Key key))
+            {
+                _uiController.SetInfoDisplay($"RMB - Pick up {KeyManager.GetKeyName(key.DoorToOpen)} key");
+            }
+            else if (hitInfo.transform.TryGetComponent<Pickup>(out Pickup pickup))
+            {
+                _uiController.SetInfoDisplay($"RMB - Pick up {pickup.Type}");
+            }
+        }
+        else
+        {
+            _uiController.SetInfoDisplay("");
+        }
+
         if(inCooldown){return;}
+        
         if (_playerInputHandler.Throw)
         {
-            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hitInfo,
-                raycastDistance,
-                pickupLayerMask, QueryTriggerInteraction.Collide))
+            if (hitInfo.transform)
             {
+              
                 if (hitInfo.transform.CompareTag("Key"))
                 {
                     if (hitInfo.transform.TryGetComponent<Key>(out Key key))
@@ -45,21 +65,18 @@ public class ItemGrabber : MonoBehaviour
                     return;
                 }
 
-                if (hitInfo.transform.CompareTag("Pickup") && !heldItems.Contains(hitInfo.transform.gameObject))
-                {
-                    currentItem = hitInfo.transform.gameObject;
-                    heldItems.Add(currentItem);
-                    currentItemIndex = heldItems.IndexOf(currentItem);
-                    SetActiveObject();
-                    currentItem.GetComponent<Rigidbody>().isKinematic = true;
-                    currentItem.GetComponent<Collider>().enabled = false;
-                    currentItem.transform.parent = transform;
-                    currentItem.transform.position = transform.position;
-                    currentItem.transform.rotation = transform.rotation;
-                    inCooldown = true;
-                    Invoke(nameof(ResetCooldown),0.2f);
-                    return;
-                }
+                if (!hitInfo.transform.CompareTag("Pickup") || heldItems.Contains(hitInfo.transform.gameObject)) return;
+                currentItem = hitInfo.transform.gameObject;
+                heldItems.Add(currentItem);
+                currentItemIndex = heldItems.IndexOf(currentItem);
+                SetActiveObject();
+                currentItem.GetComponent<Rigidbody>().isKinematic = true;
+                currentItem.GetComponent<Collider>().enabled = false;
+                currentItem.transform.parent = transform;
+                currentItem.transform.position = transform.position;
+                currentItem.transform.rotation = transform.rotation;
+                inCooldown = true;
+                Invoke(nameof(ResetCooldown),0.2f);
             }
             else
             {
@@ -70,6 +87,7 @@ public class ItemGrabber : MonoBehaviour
                 if (heldItems.Count > 0)
                 {
                     currentItem = heldItems[heldItems.Count - 1];
+                    currentItemIndex = heldItems.IndexOf(currentItem);
                     SetActiveObject();
                 }
                 else
@@ -100,7 +118,6 @@ public class ItemGrabber : MonoBehaviour
 
     private void NextItem()
     {
-        print("Next");
         int numberOfItems = heldItems.Count;
         if(numberOfItems <= 1){return;}
         if (currentItemIndex == numberOfItems-1)
@@ -119,7 +136,6 @@ public class ItemGrabber : MonoBehaviour
 
     private void PreviousItem()
     {
-        print("Previous");
         int numberOfItems = heldItems.Count;
         if(numberOfItems <= 1){return;}
 

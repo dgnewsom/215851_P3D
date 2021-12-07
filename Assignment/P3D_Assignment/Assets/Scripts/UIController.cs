@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField] private Transform keysPanel;
     [SerializeField] private GameObject keyDisplayPrefab;
+    [SerializeField] private TMP_Text infoDisplay;
     
     private void Start()
     {
@@ -19,19 +21,24 @@ public class UIController : MonoBehaviour
 
     public void UpdateKeys(List<KeyType> keys)
     {
-            foreach (Transform keyitem in keysPanel)
+        foreach (Transform keyitem in keysPanel)
+        {
+            if (keyitem.TryGetComponent<KeyDisplay>(out KeyDisplay keyDisplay))
             {
-                if (keyitem.TryGetComponent<KeyDisplay>(out KeyDisplay keyDisplay))
+                if (keys.Contains(keyDisplay.Type))
                 {
-                    if (keys.Contains(keyDisplay.Type))
-                    {
-                        keyDisplay.SetCollected(true);
-                    }
-                    else
-                    {
-                        keyDisplay.SetCollected(false);
-                    }
+                    keyDisplay.SetCollected(true);
                 }
-            } 
+                else
+                {
+                    keyDisplay.SetCollected(false);
+                }
+            }
+        } 
+    }
+
+    public void SetInfoDisplay(string textToDisplay)
+    {
+        infoDisplay.text = textToDisplay;
     }
 }

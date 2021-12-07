@@ -13,6 +13,7 @@ public class Vase : MonoBehaviour
     private float shaderProgress = 1;
     private bool isAppearing = false;
     private float smashForce = 9f;
+    private bool alreadyAppeared = false;
     
     private void Update()
     {
@@ -29,10 +30,14 @@ public class Vase : MonoBehaviour
 
     private void OnEnable()
     {
-        vaseMaterial = vaseModel.GetComponentInChildren<Renderer>().material;
-        shaderProgress = 1;
-        vaseMaterial.SetFloat("_Progress",shaderProgress);
-        isAppearing = true;
+        if (!alreadyAppeared)
+        {
+            vaseMaterial = vaseModel.GetComponentInChildren<Renderer>().material;
+            shaderProgress = 1;
+            vaseMaterial.SetFloat("_Progress",shaderProgress);
+            isAppearing = true;
+            alreadyAppeared = true;
+        }
     }
 
     private void OnCollisionEnter(Collision other)
@@ -52,13 +57,14 @@ public class Vase : MonoBehaviour
         GetComponent<Collider>().enabled = false;
         brokenVaseModel.SetActive(true);
         keyCollectible.SetActive(true);
-        Invoke(nameof(RemoveVelocity),0.5f);
+        Invoke(nameof(RemoveVelocity),0.2f);
     }
 
     private void RemoveVelocity()
     {
         foreach (Rigidbody rb in GetComponents<Rigidbody>())
         {
+            rb.isKinematic = true;
             rb.velocity = Vector3.zero;
         }
     }
