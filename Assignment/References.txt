@@ -12,3 +12,6 @@ smoke sprite sheet - https://opengameart.org/content/smoke-aura
 Door Close sound - https://freesound.org/people/rivernile7/sounds/234244/
 Door Open Sound - https://freesound.org/people/pagancow/sounds/15419/
 Door Lock / Unlock - https://freesound.org/people/Fabrizio84/sounds/458013/
+Banana Model - https://www.cgtrader.com/free-3d-models/food/fruit/banana-a86fda85-aa6c-4261-8d87-da597aa55f28
+Apple Model - https://www.cgtrader.com/free-3d-models/food/fruit/apple-fruit-afa5e664-8ff8-4598-9568-a21c35520ca3
+Orange Model - https://www.cgtrader.com/free-3d-models/food/fruit/orange-f548261d-6a73-4f1f-a318-0236d1c2b22b

@@ -3,7 +3,17 @@ guid: aeb314000e2673f4999ace8f27f65438
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Candle
+    second: {fileID: 2100000, guid: 152cc6ea55dac544d8c4be6442d31698, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wick
+    second: {fileID: 2100000, guid: 32b731e18042f484e908ef5d0ea2a59c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
