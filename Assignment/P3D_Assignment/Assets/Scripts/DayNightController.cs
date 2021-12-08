@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 
 public class DayNightController : MonoBehaviour
@@ -8,7 +9,7 @@ public class DayNightController : MonoBehaviour
     [SerializeField] private VolumeProfile nightProfile;
     [SerializeField] private AudioClip nightAmbientSound;
     [SerializeField] private AudioClip dayAmbientSound;
-
+    [SerializeField] private UnityEvent endingEvent;
 
     private AudioSource _outsideAudioSource;
     private LightBulb[] _lights;
@@ -42,8 +43,13 @@ public class DayNightController : MonoBehaviour
         _outsideAudioSource.Play();
         _volume.profile = dayProfile;
         UpdateAnimator();
+        Invoke(nameof(EndingEvent),1f);
     }
 
+    private void EndingEvent()
+    {
+        endingEvent.Invoke();
+    }
     private void SetNighttime()
     {
         isDaytime = false;
