@@ -7,7 +7,7 @@ public class Candle : MonoBehaviour
 {
     [SerializeField] private GameObject keyObject;
     
-    private Vector3 _targetScale = new Vector3(1,1,0.1f);
+    private Vector3 _targetScale = new Vector3(0.75f,0.75f,0.1f);
     private bool _burningDown;
 
     private void Update()
