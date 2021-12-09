@@ -71,10 +71,11 @@ public class ItemGrabber : MonoBehaviour
                 _currentItemIndex = _heldItems.IndexOf(_currentItem);
                 SetActiveObject();
                 _currentItem.GetComponent<Rigidbody>().isKinematic = true;
-                //_currentItem.GetComponent<Collider>().enabled = false;
+                _currentItem.GetComponent<Collider>().enabled = false;
                 _currentItem.transform.parent = transform;
                 _currentItem.transform.position = transform.position;
                 _currentItem.transform.rotation = transform.rotation;
+                _currentItem.transform.localScale = new Vector3(0.25f,0.25f,0.25f);
                 _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);
             }
@@ -98,6 +99,7 @@ public class ItemGrabber : MonoBehaviour
                 itemToThrow.TryGetComponent<Rigidbody>(out Rigidbody itemRb);
                 itemRb.isKinematic = false;
                 itemRb.AddForce(cameraTransform.forward * throwForce * 100f, ForceMode.Acceleration);
+                itemToThrow.transform.localScale = new Vector3(1, 1, 1);
                 _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);
             }
