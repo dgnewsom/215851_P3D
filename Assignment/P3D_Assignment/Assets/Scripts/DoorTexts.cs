@@ -55,7 +55,7 @@ public class DoorTexts : MonoBehaviour
         {
             if (_keyManager.CheckIfKeyHeld(_door.Type))
             {
-                UpdateDoorText(nearestTextPanel.GetComponentInChildren<TMP_Text>(),$"LMB to \nUnlock");
+                UpdateDoorText(nearestTextPanel.GetComponentInChildren<TMP_Text>(),$"Unlock");
             }
             else
             {
@@ -66,7 +66,7 @@ public class DoorTexts : MonoBehaviour
         {
             if(_animator.GetInteger("OpenState") == 1)
             {
-                UpdateDoorText(nearestTextPanel.GetComponentInChildren<TMP_Text>(),$"LMB to \nOpen");
+                UpdateDoorText(nearestTextPanel.GetComponentInChildren<TMP_Text>(),$"Open");
             }
             else
             {

@@ -34,11 +34,11 @@ public class ItemGrabber : MonoBehaviour
         {
             if (hitInfo.transform.TryGetComponent<Key>(out Key key))
             {
-                _uiController.SetInfoDisplay($"RMB - Pick up {KeyManager.GetKeyName(key.DoorToOpen)} key");
+                _uiController.SetInfoDisplay($"Pick up {KeyManager.GetKeyName(key.DoorToOpen)} key");
             }
             else if (hitInfo.transform.TryGetComponent<Pickup>(out Pickup pickup))
             {
-                _uiController.SetInfoDisplay($"RMB - Pick up {pickup.Type}");
+                _uiController.SetInfoDisplay($"Pick up {pickup.Type}");
             }
         }
         else
