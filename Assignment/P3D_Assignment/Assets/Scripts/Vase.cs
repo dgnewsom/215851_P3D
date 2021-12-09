@@ -53,6 +53,7 @@ public class Vase : MonoBehaviour
 
     private void SmashVase()
     {
+        GetComponent<AudioSource>().Play();
         vaseModel.SetActive(false);
         GetComponent<Collider>().enabled = false;
         brokenVaseModel.SetActive(true);

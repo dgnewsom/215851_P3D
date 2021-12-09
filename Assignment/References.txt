@@ -13,6 +13,11 @@ Door Close sound - https://freesound.org/people/rivernile7/sounds/234244/
 Door Open Sound - https://freesound.org/people/pagancow/sounds/15419/
 Door Lock / Unlock - https://freesound.org/people/Fabrizio84/sounds/458013/
 Piano - https://freesound.org/people/deadrobotmusic/sounds/574346/
+Serving Hatch - https://freesound.org/people/craigsmith/sounds/438442/
+Vase Smash - https://freesound.org/people/kingsrow/sounds/194684/
+
+Fonts
+TitleFont - https://www.dafont.com/the-night-lamp.font
 
 Sprites
 smoke sprite sheet - https://opengameart.org/content/smoke-aura

@@ -71,7 +71,7 @@ public class ItemGrabber : MonoBehaviour
                 _currentItemIndex = _heldItems.IndexOf(_currentItem);
                 SetActiveObject();
                 _currentItem.GetComponent<Rigidbody>().isKinematic = true;
-                _currentItem.GetComponent<Collider>().enabled = false;
+                //_currentItem.GetComponent<Collider>().enabled = false;
                 _currentItem.transform.parent = transform;
                 _currentItem.transform.position = transform.position;
                 _currentItem.transform.rotation = transform.rotation;
