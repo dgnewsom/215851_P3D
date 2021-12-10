@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,9 +23,9 @@ public class UIController : MonoBehaviour
 
     public void UpdateKeys(List<KeyType> keys)
     {
-        foreach (Transform keyitem in keysPanel)
+        foreach (Transform keyItem in keysPanel)
         {
-            if (keyitem.TryGetComponent<KeyDisplay>(out KeyDisplay keyDisplay))
+            if (keyItem.TryGetComponent<KeyDisplay>(out KeyDisplay keyDisplay))
             {
                 if (keys.Contains(keyDisplay.Type))
                 {

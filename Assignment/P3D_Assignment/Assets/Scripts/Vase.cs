@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Vase : MonoBehaviour
@@ -9,45 +6,44 @@ public class Vase : MonoBehaviour
     [SerializeField] private GameObject brokenVaseModel;
     [SerializeField] private GameObject keyCollectible;
 
-    private Material vaseMaterial;
-    private float shaderProgress = 1;
-    private bool isAppearing = false;
-    private float smashForce = 9f;
-    private bool alreadyAppeared = false;
-    
+    private Material _vaseMaterial;
+    private float _shaderProgress = 1;
+    private bool _isAppearing;
+    private readonly float smashForce = 9f;
+    private bool _alreadyAppeared;
+    private static readonly int Progress = Shader.PropertyToID("_Progress");
+
     private void Update()
     {
-        if (isAppearing)
+        if (_isAppearing)
         {
-            shaderProgress = Mathf.Clamp01(shaderProgress - Time.deltaTime * 0.5f);
-            if (shaderProgress <= 0)
+            _shaderProgress = Mathf.Clamp01(_shaderProgress - Time.deltaTime * 0.5f);
+            if (_shaderProgress <= 0)
             {
-                isAppearing = false;
+                _isAppearing = false;
             }
-            vaseMaterial.SetFloat("_Progress",shaderProgress);
+            _vaseMaterial.SetFloat(Progress,_shaderProgress);
         }
     }
 
     private void OnEnable()
     {
-        if (!alreadyAppeared)
+        if (!_alreadyAppeared)
         {
-            vaseMaterial = vaseModel.GetComponentInChildren<Renderer>().material;
-            shaderProgress = 1;
-            vaseMaterial.SetFloat("_Progress",shaderProgress);
-            isAppearing = true;
-            alreadyAppeared = true;
+            _vaseMaterial = vaseModel.GetComponentInChildren<Renderer>().material;
+            _shaderProgress = 1;
+            _vaseMaterial.SetFloat(Progress,_shaderProgress);
+            _isAppearing = true;
+            _alreadyAppeared = true;
         }
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")) return;
+        if (other.relativeVelocity.x > smashForce || other.relativeVelocity.y > smashForce || other.relativeVelocity.z > smashForce)
         {
-            if (other.relativeVelocity.x > smashForce || other.relativeVelocity.y > smashForce || other.relativeVelocity.z > smashForce)
-            {
-                SmashVase();
-            } 
+            SmashVase();
         }
     }
 
@@ -69,4 +65,5 @@ public class Vase : MonoBehaviour
             rb.velocity = Vector3.zero;
         }
     }
+    
 }

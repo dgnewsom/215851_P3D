@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class LightBulb : MonoBehaviour
 {
-    [SerializeField] private bool flickering = false;
+    [SerializeField] private bool flickering;
     [SerializeField] private Vector2 flickerDelay = new Vector2(0.1f, 5f);
     [SerializeField] private Vector2 flickerOffTime = new Vector2(0.01f, 0.1f);
 

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pendulum : MonoBehaviour
@@ -9,7 +6,7 @@ public class Pendulum : MonoBehaviour
     [SerializeField] private AudioClip tockSound;
     
     private AudioSource _audioSource;
-    private bool isTickNext;
+    private bool _isTickNext;
 
     private void Start()
     {
@@ -20,7 +17,7 @@ public class Pendulum : MonoBehaviour
     {
         if (other.CompareTag("Pendulum"))
         {
-            if (isTickNext)
+            if (_isTickNext)
             {
                 _audioSource.PlayOneShot(tickSound);
             }
@@ -28,7 +25,7 @@ public class Pendulum : MonoBehaviour
             {
                 _audioSource.PlayOneShot(tockSound);
             }
-            isTickNext = !isTickNext;
+            _isTickNext = !_isTickNext;
         }
     }
 }

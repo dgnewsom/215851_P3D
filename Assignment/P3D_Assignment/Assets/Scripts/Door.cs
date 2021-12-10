@@ -1,7 +1,7 @@
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
+//Door states (indexes match animator int values)
 public enum DoorState
 {
     OpenIn,
@@ -10,20 +10,21 @@ public enum DoorState
 }
 public class Door : MonoBehaviour
 {
+    [Header("Lock settings")]
     [SerializeField] private bool isLocked;
-    [SerializeField] private bool lockOnEntry;
+    [Header("Trigger daytime / ending")]
     [SerializeField] private bool triggerDaytime;
+    [Header("KeyType required to unlock")]
     [SerializeField] private KeyType keyType;
 
     private DoorState _currentState = DoorState.Closed;
     private Animator _animator;
     private readonly float coolDownDelay = 0.5f;
     private float _cooldownTimer;
-    private static readonly int OpenState = Animator.StringToHash("OpenState");
     private KeyManager _keyManager;
     private DoorTexts _doorTexts;
     private DoorSounds _doorSounds;
-    
+    private static readonly int OpenState = Animator.StringToHash("OpenState");
 
     public DoorState CurrentState => _currentState;
 
@@ -31,8 +32,6 @@ public class Door : MonoBehaviour
 
     public KeyType Type => keyType;
 
-
-    // Start is called before the first frame update
     private void Start()
     {
         _animator = GetComponentInChildren<Animator>();

@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +13,10 @@ public class ItemGrabber : MonoBehaviour
     private PlayerInputHandler _playerInputHandler;
     private UIController _uiController;
     private GameObject _currentItem;
-    private int _currentItemIndex = 0;
-    private bool _inCooldown = false;
+    private int _currentItemIndex;
+    private bool _inCooldown;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _playerInputHandler = FindObjectOfType<PlayerInputHandler>();
         _keyManager = FindObjectOfType<KeyManager>();
@@ -72,9 +69,10 @@ public class ItemGrabber : MonoBehaviour
                 SetActiveObject();
                 _currentItem.GetComponent<Rigidbody>().isKinematic = true;
                 _currentItem.GetComponent<Collider>().enabled = false;
-                _currentItem.transform.parent = transform;
-                _currentItem.transform.position = transform.position;
-                _currentItem.transform.rotation = transform.rotation;
+                Transform grabberTransform = transform;
+                _currentItem.transform.parent = grabberTransform;
+                _currentItem.transform.position = grabberTransform.position;
+                _currentItem.transform.rotation = grabberTransform.rotation;
                 _currentItem.transform.localScale = new Vector3(0.25f,0.25f,0.25f);
                 _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);
@@ -98,7 +96,7 @@ public class ItemGrabber : MonoBehaviour
                 itemToThrow.GetComponent<Collider>().enabled = true;
                 itemToThrow.TryGetComponent<Rigidbody>(out Rigidbody itemRb);
                 itemRb.isKinematic = false;
-                itemRb.AddForce(cameraTransform.forward * throwForce * 100f, ForceMode.Acceleration);
+                itemRb.AddForce(cameraTransform.forward * (throwForce * 100f), ForceMode.Acceleration);
                 itemToThrow.transform.localScale = new Vector3(1, 1, 1);
                 _inCooldown = true;
                 Invoke(nameof(ResetCooldown),0.2f);

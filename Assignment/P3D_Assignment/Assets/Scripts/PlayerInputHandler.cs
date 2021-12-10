@@ -13,7 +13,6 @@ public class PlayerInputHandler : MonoBehaviour
 
     private PlayerInput _input;
 
-    //Input Variables
     private Vector2 _move;
     private Vector2 _look;
     private bool _jump;
@@ -23,7 +22,6 @@ public class PlayerInputHandler : MonoBehaviour
     private bool _nextItem;
     private bool _previousItem;
 
-    //Public getters and setters
     public Vector2 Move => _move;
     public Vector2 Look => _look;
 

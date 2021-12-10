@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +9,7 @@ public class DoorTexts : MonoBehaviour
     private KeyManager _keyManager;
     private Transform _player;
     private Animator _animator;
+    private static readonly int OpenState = Animator.StringToHash("OpenState");
 
     private void Start()
     {
@@ -38,17 +36,7 @@ public class DoorTexts : MonoBehaviour
     public void SetDoorText()
     {
         ClearDoorText();
-        GameObject nearestTextPanel = null;
-        float distance = float.MaxValue;
-        foreach (GameObject textPanel in textPanels)
-        {
-            float doorTextDistance = Vector3.Distance(textPanel.transform.position, _player.position);
-            if (doorTextDistance < distance)
-            {
-                distance = doorTextDistance;
-                nearestTextPanel = textPanel;
-            }
-        }
+        GameObject nearestTextPanel = GetNearestTextPanel();
         if(nearestTextPanel == null){return;}
         nearestTextPanel.SetActive(true);
         if (_door.IsLocked)
@@ -64,7 +52,7 @@ public class DoorTexts : MonoBehaviour
         }
         else
         {
-            if(_animator.GetInteger("OpenState") == 1)
+            if(_animator.GetInteger(OpenState) == 1)
             {
                 UpdateDoorText(nearestTextPanel.GetComponentInChildren<TMP_Text>(),$"Open");
             }
@@ -73,6 +61,23 @@ public class DoorTexts : MonoBehaviour
                 ClearDoorText();
             }
         }
+    }
+
+    private GameObject GetNearestTextPanel()
+    {
+        GameObject nearestTextPanel = null;
+        float distance = float.MaxValue;
+        foreach (GameObject textPanel in textPanels)
+        {
+            float doorTextDistance = Vector3.Distance(textPanel.transform.position, _player.position);
+            if (doorTextDistance < distance)
+            {
+                distance = doorTextDistance;
+                nearestTextPanel = textPanel;
+            }
+        }
+
+        return nearestTextPanel;
     }
 
     public void ClearDoorText()

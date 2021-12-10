@@ -1,13 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Candle : MonoBehaviour
 {
-    [SerializeField] private GameObject keyObject;
+    [SerializeField] private GameObject keyObjectToAppear;
     
-    private Vector3 _targetScale = new Vector3(0.75f,0.75f,0.1f);
+    private readonly Vector3 _targetScale = new Vector3(0.75f,0.75f,0.1f);
     private bool _burningDown;
 
     private void Update()
@@ -17,7 +14,7 @@ public class Candle : MonoBehaviour
             transform.localScale = Vector3.Lerp(transform.localScale, _targetScale, Time.deltaTime);
             if (transform.localScale.z <= 0.15f)
             {
-                keyObject.SetActive(true);
+                keyObjectToAppear.SetActive(true);
                 _burningDown = false;
             }
         }

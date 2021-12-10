@@ -1,14 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ServingHatchTrigger : MonoBehaviour
 {
     private Animator _animator;
     private AudioSource _audioSource;
-    private bool isPlaying;
-    
+    private bool _isPlaying;
+    private static readonly int IsActive = Animator.StringToHash("isActive");
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +16,13 @@ public class ServingHatchTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(isPlaying){return;}
+        if(_isPlaying){return;}
 
         if (other.CompareTag("Player"))
         {
-            isPlaying = true;
+            _isPlaying = true;
             _audioSource.Play();
-            _animator.SetBool("isActive",true);
+            _animator.SetBool(IsActive,true);
         }
     }
 }

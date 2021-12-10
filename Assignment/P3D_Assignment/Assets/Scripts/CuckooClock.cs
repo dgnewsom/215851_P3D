@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CuckooClock : MonoBehaviour
@@ -10,20 +7,21 @@ public class CuckooClock : MonoBehaviour
     
     private AudioSource _cuckooClockAudioSource;
     private bool _hasPlayed;
+    private static readonly int Cuckoo = Animator.StringToHash("Cuckoo");
 
     private void Start()
     {
         _cuckooClockAudioSource = transform.parent.GetComponent<AudioSource>();
         cuckooToDrop.SetActive(false);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if(_hasPlayed){return;}
-
+        
         if (other.CompareTag("Player"))
         {
-            GetComponent<Animator>().SetBool("Cuckoo",true);
+            GetComponent<Animator>().SetBool(Cuckoo,true);
             _hasPlayed = true;
         }
     }

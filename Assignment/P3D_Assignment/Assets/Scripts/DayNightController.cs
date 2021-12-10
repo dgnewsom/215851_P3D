@@ -4,22 +4,25 @@ using UnityEngine.Rendering;
 
 public class DayNightController : MonoBehaviour
 {
-    [SerializeField] private bool isDaytime;
+    [Header("Volume Profiles")]
     [SerializeField] private VolumeProfile dayProfile;
     [SerializeField] private VolumeProfile nightProfile;
+    [Header("Audio")]
     [SerializeField] private AudioClip nightAmbientSound;
     [SerializeField] private AudioClip dayAmbientSound;
+    [Header("Event to trigger on switch to daytime")]
     [SerializeField] private UnityEvent endingEvent;
 
-    private AudioSource _outsideAudioSource;
     private LightBulb[] _lights;
+    private bool _isDaytime;
+    private AudioSource _outsideAudioSource;
     private Volume _volume;
     private Animator _animator;
     private float _animationSpeed;
     private static readonly int Speed = Animator.StringToHash("Speed");
     private static readonly int Daytime = Animator.StringToHash("IsDaytime");
 
-    public bool IsDaytime => isDaytime;
+    public bool IsDaytime => _isDaytime;
 
     private void Start()
     {
@@ -33,12 +36,12 @@ public class DayNightController : MonoBehaviour
 
     private void UpdateAnimator()
     {
-        _animator.SetBool(Daytime,isDaytime);
+        _animator.SetBool(Daytime,_isDaytime);
     }
 
     private void SetDaytime()
     {
-        isDaytime = true;
+        _isDaytime = true;
         _outsideAudioSource.clip = dayAmbientSound;
         _outsideAudioSource.Play();
         _volume.profile = dayProfile;
@@ -46,23 +49,20 @@ public class DayNightController : MonoBehaviour
         Invoke(nameof(EndingEvent),1f);
     }
 
-    private void EndingEvent()
-    {
-        endingEvent.Invoke();
-    }
     private void SetNighttime()
     {
-        isDaytime = false;
+        _isDaytime = false;
         _outsideAudioSource.clip = nightAmbientSound;
         _outsideAudioSource.Play();
         _volume.profile = nightProfile;
         UpdateAnimator();
     }
+
     [ContextMenu("Toggle Day/Night")]
     public void ToggleDayNight()
     {
-        isDaytime = !isDaytime;
-        if (isDaytime)
+        _isDaytime = !_isDaytime;
+        if (_isDaytime)
         {
             SetDaytime();
         }
@@ -78,7 +78,7 @@ public class DayNightController : MonoBehaviour
         SetDaytime();
         _animator.SetFloat(Speed,5f);
     }
-    
+
     [ContextMenu("Skip To Night")]
     public void SkipToNighttime()
     {
@@ -106,5 +106,10 @@ public class DayNightController : MonoBehaviour
     public void ResetSpeed()
     {
         _animator.SetFloat(Speed,_animationSpeed);
+    }
+
+    private void EndingEvent()
+    {
+        endingEvent.Invoke();
     }
 }

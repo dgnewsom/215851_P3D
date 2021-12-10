@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.VFX;
 using Random = UnityEngine.Random;
 
@@ -13,17 +9,17 @@ public class FireBasket : MonoBehaviour
     [SerializeField] private PickupType triggerObject;
     [SerializeField] private UnityEvent triggerEvent;
 
-    private Light _fireGlow;
+    private Light _fireGlowLight;
     private Vector2 _fireGlowIntensityRange = new Vector2(40,80);
 
     private void Start()
     {
-        _fireGlow = GetComponentInChildren<Light>();
+        _fireGlowLight = GetComponentInChildren<Light>();
     }
 
     private void FixedUpdate()
     {
-        _fireGlow.intensity = Mathf.Lerp(_fireGlow.intensity, Random.Range(_fireGlowIntensityRange.x, _fireGlowIntensityRange.y), Time.deltaTime * 10f);
+        _fireGlowLight.intensity = Mathf.Lerp(_fireGlowLight.intensity, Random.Range(_fireGlowIntensityRange.x, _fireGlowIntensityRange.y), Time.deltaTime * 10f);
     }
 
     private void OnTriggerEnter(Collider other)

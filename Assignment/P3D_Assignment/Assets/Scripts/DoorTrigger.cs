@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class DoorTrigger : MonoBehaviour
@@ -8,7 +7,6 @@ public class DoorTrigger : MonoBehaviour
     private Door _door;
     private PlayerInputHandler _inputHandler;
 
-    // Start is called before the first frame update
     void Start()
     {
         _door = GetComponentInParent<Door>();
@@ -42,6 +40,4 @@ public class DoorTrigger : MonoBehaviour
     {
         _door.SetDoorState(DoorState.Closed, 3f);
     }
-
-
 }

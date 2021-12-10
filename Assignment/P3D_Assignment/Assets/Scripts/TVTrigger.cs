@@ -1,8 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
 
 public class TVTrigger : MonoBehaviour
 {
@@ -10,9 +6,7 @@ public class TVTrigger : MonoBehaviour
    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            screen.SetActive(true);
-        }
+        if (!other.CompareTag("Player")) return;
+        screen.SetActive(true);
     }
 }

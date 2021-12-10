@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -24,15 +21,10 @@ public class Wolves : MonoBehaviour
     private void FixedUpdate()
     {
         if(_dayNightController.IsDaytime){return;}
-        else
-        {
-            _delayTimer -= Time.deltaTime;
-            if (_delayTimer <= 0f)
-            {
-                PlayRandomWolfSound();
-                ResetDelayTimer();
-            }
-        }
+        _delayTimer -= Time.deltaTime;
+        if (!(_delayTimer <= 0f)) return;
+        PlayRandomWolfSound();
+        ResetDelayTimer();
     }
 
     private void ResetDelayTimer()
@@ -47,5 +39,4 @@ public class Wolves : MonoBehaviour
         _audioSource.PlayOneShot(soundToPlay);
         (wolfSounds[0], wolfSounds[indexToPlay]) = (wolfSounds[indexToPlay], wolfSounds[0]);
     }
-    
 }

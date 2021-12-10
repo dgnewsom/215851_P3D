@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DoorSounds : MonoBehaviour
@@ -10,9 +8,8 @@ public class DoorSounds : MonoBehaviour
     [SerializeField] private AudioClip doorUnlockSound;
 
     private Door _door;
-
     private AudioSource _audioSource;
-    // Start is called before the first frame update
+    
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum PickupType
@@ -12,9 +9,9 @@ public enum PickupType
 
 public class Pickup : MonoBehaviour
 {
-    [SerializeField] private PickupType _pickupType;
+    [SerializeField] private PickupType pickupType;
 
-    public PickupType Type => _pickupType;
+    public PickupType Type => pickupType;
 
     public static string GetPickupName(PickupType pickupType)
     {
